@@ -4,7 +4,7 @@ A node-red node to analyse the memory consumption of the nodes.
 ## Install
 Run the following npm command in your Node-RED user directory (typically ~/.node-red):
 ```
-npm install node-red-contrib-nodes-memory@0.0.1-beta.2
+npm install node-red-contrib-nodes-memory@0.0.1-beta.3
 ```
 
 See the related [discussion](https://discourse.nodered.org/t/analyse-node-red-memory-usage/5668) on the Node-RED forum for more information about this beta version...
