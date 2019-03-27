@@ -1,6 +1,6 @@
 {
     "name"         : "node-red-contrib-nodes-memory",
-    "version"      : "0.0.1-beta.1",
+    "version"      : "0.0.1-beta.2",
     "description"  : "A node-red node to analyse the memory consumption of the nodes.",
     "dependencies": {
        "object-sizeof": "1.3.0",
