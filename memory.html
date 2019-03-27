@@ -20,9 +20,9 @@
             namefilter: {value:""},
             idfilter: {value:""},
             tabidfilter: {value:""},
+            excludeid: {value:""},
             topCount: {value:0},
             sort: {value:"size"},
-            analysecontext: {value:false},
             separatemsg: {value:false},
             sum: {value:false}
         },        
@@ -58,7 +58,11 @@
         <input type="text" id="node-input-tabidfilter" placeholder="Tab id (incl. wildcard *)">
     </div>
     <div class="form-row">
-        <label for="node-input-topCount"><i class="fas fa-arrows-alt-h"></i> Top count</label>
+        <label for="node-input-excludeid"><i class="fa fa-filter"></i> Exclude id</label>
+        <input type="text" id="node-input-excludeid" placeholder="Node id (incl. wildcard *)">
+    </div>
+    <div class="form-row">
+        <label for="node-input-topCount"><i class="fa fa-angle-double-up "></i> Top count</label>
         <input type="number" id="node-input-topCount" step="1" min="0">
     </div>
     <div class="form-row">
@@ -68,10 +72,6 @@
             <option value="name">By node name</option>
             <option value="type">By node type</option>            
         </select>
-    </div>
-    <div class="form-row">  
-        <input type="checkbox" id="node-input-analysecontext" style="display: inline-block; width: auto; vertical-align: top;">
-        <label for="node-input-analysecontext" style="width:70%;" disabled="disabled"> Analyse node context memory</label> 
     </div>
     <div class="form-row">
         <input type="checkbox" id="node-input-separatemsg" style="display: inline-block; width: auto; vertical-align: top;">
@@ -98,12 +98,12 @@
     Limit the memory analyses to nodes having the specified node id(s).  A <code>*</code> wildcard character is allowed.</p>
     <p><strong>Tab id filter:</strong><br/>
     Limit the memory analyses to nodes located on the specified tab id(s).  A <code>*</code> wildcard character is allowed.</p>
+    <p><strong>Tab id filter:</strong><br/>
+    Exclude specific nodes from analysis.  A <code>*</code> wildcard character is allowed.</p>
     <p><strong>Top count:</strong><br/>
     Limit the output to only the specified number of nodes with the largest size. When no value or 0 value, all available nodes will be analyzed.</p>
     <p><strong>Sort:</strong><br/>
     Sort the node list by node name, node type or node memory size (descending).</p>
-    <p><strong>Analyze node context memory:</strong><br/>
-    When selected, the node's context memory size will also be analyzed.  Caution: the size of the data stored by the node on flow and global context memory will <strong>NOT</strong> be included!</p>
     <p><strong>Separate message per node:</strong><br/>
     When selected, a separate message will be send for every specified node.  Otherwise a single message will be send, which contains the memory analysis of all the specified nodes.</p>
     <p><strong>Calculate total used memory:</strong><br/>
