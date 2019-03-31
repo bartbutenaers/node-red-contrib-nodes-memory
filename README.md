@@ -1,6 +1,8 @@
 # node-red-contrib-nodes-memory
 A node-red node to analyse the memory consumption of the nodes.
 
+*CAUTION: this node isn't operational yet (see 'Limitations' section below)!!!*
+
 ## Install
 Run the following npm command in your Node-RED user directory (typically ~/.node-red):
 ```
