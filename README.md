@@ -23,7 +23,7 @@ The following example flow explains how this node works:
 ![Limitations](/images/limitations.png)
 
 This node is still in beta phase, since it has currently a large number of limitations:
-1. Each node has its own ***node memory***, which can already be measured.
+1. Each node has its own ***node memory***, which can already be measured for most nodes.  However the function node (and some similar contributions) run in a NodeJS sandbox.  As a result when you use ```this.someVariable='someContent'``` in a function node, the ```this``` refers to the sandbox instance.  This means the data is not stored in the function node itself...  See this [discussion](https://discourse.nodered.org/t/get-node-instance-via-red-nodes-getnode/9611/4) for more information.
 1. Each node has its own ***context memory***, which cannot be measured at the moment.  Extra ```node.getSize``` functionality in the core of Node-RED might make this possible?
 1. All nodes can write in the same ***flow memory***, so there is no way to determine which flow memory is used by which node.  This functionality can never be implemented.
 1. All nodes can write in the same ***global memory***, so there is no way to determine which global memory is used by which node.  This functionality can never be implemented.
