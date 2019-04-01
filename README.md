@@ -1,7 +1,7 @@
 # node-red-contrib-nodes-memory
 A node-red node to analyse the memory consumption of the nodes.
 
-*CAUTION: this node isn't operational yet (see 'Limitations' section below)!!!*
+***CAUTION: this node hasn't been published on NPM, since it has to much limitations  (see below)!!!  I will keep it here on Github, in case someone else might be wondering why this kind of functionality isn't available in Node-RED...***
 
 ## Install
 Run the following npm command in your Node-RED user directory (typically ~/.node-red):
@@ -12,6 +12,8 @@ npm install node-red-contrib-nodes-memory@0.0.1-beta.3
 See the related [discussion](https://discourse.nodered.org/t/analyse-node-red-memory-usage/5668) on the Node-RED forum for more information about this beta version...
 
 ## Node Usage
+The main purpose of this node is to show the current memory consumption of each selected Node-RED node.  This should simplify memory analyses, e.g. to track memory leaks.
+
 The following example flow explains how this node works:
 
 ![Flow](/images/memory_flow.png)
@@ -25,7 +27,18 @@ The following example flow explains how this node works:
 ![Limitations](/images/limitations.png)
 
 This node is still in beta phase, since it has currently a large number of limitations:
-1. Each node has its own ***node memory***, which can already be measured for most nodes.  However the function node (and some similar contributions) run in a NodeJS sandbox.  As a result when you use ```this.someVariable='someContent'``` in a function node, the ```this``` refers to the sandbox instance.  This means the data is not stored in the function node itself...  See this [discussion](https://discourse.nodered.org/t/get-node-instance-via-red-nodes-getnode/9611/4) for more information.
+1. Each node has its own ***node memory***, by storing data in ```this.someVariable``` or ```node.someVariable```.  For most nodes the size of that data can be calculated, however not for all nodes: e.g. the function node (and some similar contributions) run in a NodeJS sandbox, so ```this``` refers to the sandbox instance (and not the function node itself).  See this [discussion](https://discourse.nodered.org/t/get-node-instance-via-red-nodes-getnode/9611/4) for more information.
+1. Some nodes might store data in local variables, and use it via ***closures***:
+   ```
+   function MyCustomNode() {
+      var someVariable = 'data';
+      
+      function someNestedFunction() {
+         // use someVariable declared in the parent function
+      }
+   }
+   ```
+   The local variable can be used by all nested functions, but it cannot be accessed from outside.  So there is no way to determine the size of that data...
 1. Each node has its own ***context memory***, which cannot be measured at the moment.  Extra ```node.getSize``` functionality in the core of Node-RED might make this possible?
 1. All nodes can write in the same ***flow memory***, so there is no way to determine which flow memory is used by which node.  This functionality can never be implemented.
 1. All nodes can write in the same ***global memory***, so there is no way to determine which global memory is used by which node.  This functionality can never be implemented.
